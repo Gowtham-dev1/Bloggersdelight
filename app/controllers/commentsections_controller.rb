@@ -1,0 +1,3 @@
+class CommentsectionsController < ApplicationController
+
+end
