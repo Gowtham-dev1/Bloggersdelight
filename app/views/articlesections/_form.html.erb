@@ -1,0 +1,39 @@
+<%= form_with(model: articlesection) do |form| %>
+  <% if articlesection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(articlesection.errors.count, "error") %> prohibited this articlesection from being saved:</h2>
+
+      <ul>
+        <% articlesection.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.number_field :user_id,id: :articlesection_user_id,type: :hidden ,class:"form-control",value:current_userauthentication.id %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :article_topic %>
+    <%= form.text_field :article_topic  ,class:"form-control"%>
+  </div>
+
+  <div class="field form-group ">
+    <%= form.label :article_content %><br>
+    <%= form.text_area :article_content, :cols => 50, :rows => 4 ,class:"form-control"%>
+  </div>
+
+  <div class="field form-group">
+    <%= form.number_field :likes_count, value:0 ,type: :hidden,class:"form-control"%>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-secondary"%>
+  </div>
+
+  <br>
+<% end %>

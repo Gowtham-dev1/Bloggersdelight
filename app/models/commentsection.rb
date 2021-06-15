@@ -1,3 +1,3 @@
 class Commentsection < ApplicationRecord
-  belongs_to :article
+  belongs_to :articlesections
 end

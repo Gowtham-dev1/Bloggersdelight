@@ -1,0 +1,12 @@
+<div class="jumbotron">
+  <h1 class="display-4">My Article</h1>
+  <p class="lead">Topic : <%= @articlesection.article_topic %></p>
+  <p class="lead">Content : </p>
+  <textarea class="form-control" rows="3" readonly><%= @articlesection.article_content %></textarea>
+  <p class="lead">Likes : <%= @articlesection.likes_count %></p>
+  <br>
+  <%= link_to 'Edit', edit_articlesection_path(@articlesection),class:"btn btn-outline-secondary"%>
+  <%= link_to 'Back', articlesections_path,class:"btn btn-outline-secondary" %>
+  <br>
+
+</div>

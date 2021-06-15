@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
 
-  get '/', to: 'userdetails#index'
+  devise_for :userauthentications
+  resources :articlesections
+  root 'userdetails#index'
+  get 'userdetails/about'
 end

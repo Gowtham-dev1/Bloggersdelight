@@ -2,12 +2,12 @@
 
 one:
   user_id: 1
-  topic: MyString
-  content: MyString
+  article_topic: MyString
+  article_content: MyString
   likes_count: 1
 
 two:
   user_id: 1
-  topic: MyString
-  content: MyString
+  article_topic: MyString
+  article_content: MyString
   likes_count: 1
