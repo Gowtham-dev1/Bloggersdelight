@@ -1,8 +1,0 @@
-class UserdetailsController < ApplicationController
-
-  def index
-  end
-  def about
-  end
-  
-end

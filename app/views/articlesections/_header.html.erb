@@ -6,9 +6,6 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= link_to "About Us",userdetails_about_path,class:"nav-link" %>
-      </li>
       <% if userauthentication_signed_in? %>
         <li class="nav-item">
           <%= link_to "My Articles",articlesections_path,class:"nav-link" %>
@@ -23,18 +20,21 @@
           <%= link_to "Sign Out",destroy_userauthentication_session_path, method: :delete,class:"nav-link" %>
         </li>
       <% else %>
+      <li class="nav-item">
+        <%= link_to "Sign In",new_userauthentication_session_path,class:"nav-link" %>
+      </li>
         <li class="nav-item">
           <%= link_to "Sign Up",new_userauthentication_registration_path,class:"nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Sign In",new_userauthentication_session_path,class:"nav-link" %>
-        </li>
+
       <% end %>
 
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <% if userauthentication_signed_in? %>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    <% end %>
   </div>
 </nav>

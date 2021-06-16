@@ -1,6 +1,6 @@
 class ArticlesectionsController < ApplicationController
   before_action :set_articlesection, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_userauthentication!
   # GET /articlesections or /articlesections.json
   def index
     @articlesections = Articlesection.all
@@ -9,6 +9,7 @@ class ArticlesectionsController < ApplicationController
   # GET /articlesections/1 or /articlesections/1.json
   def show
   end
+
 
   # GET /articlesections/new
   def new
@@ -56,6 +57,11 @@ class ArticlesectionsController < ApplicationController
     end
   end
 
+  def all_articles
+    @user= Userauthentication.all
+    @articles = Articlesection.order('created_at DESC')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_articlesection
@@ -64,6 +70,10 @@ class ArticlesectionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def articlesection_params
-      params.require(:articlesection).permit(:user_id, :article_topic, :article_content, :likes_count)
+      params.require(:articlesection).permit(:userauthentication_id, :article_topic, :article_content, :likes_count)
     end
+
+
+
+
 end

@@ -1,0 +1,21 @@
+<h1>Welcome</h1>
+<br>
+<% if userauthentication_signed_in? %>
+  <% @articles.each do |i| %>
+    <div class="row p-3 mb-2 bg-light text-dark shadow-none p-3 mb-5 bg-light rounded ">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%=i.article_topic%></h5>
+            <p class="card-text"><%=i.article_content%></p>
+            <br>
+              <h5 class="card-title">
+            <a href="#" class="btn btn-primary"><%=i.likes_count%> Likes</a>
+            <a href="#" class="btn btn-primary">Comment</a>
+            <%="Credits : "+ (@user.find_by id: i.userauthentication_id).email%></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

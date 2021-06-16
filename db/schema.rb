@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_093120) do
+ActiveRecord::Schema.define(version: 2021_06_16_113000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_06_15_093120) do
   end
 
   create_table "articlesections", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "userauthentication_id"
     t.string "article_topic"
     t.string "article_content"
     t.integer "likes_count"
