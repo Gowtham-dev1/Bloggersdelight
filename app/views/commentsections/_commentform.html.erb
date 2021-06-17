@@ -1,0 +1,24 @@
+<%= form_with(model: commentsection) do |form| %>
+
+
+  <div class="field form-group">
+    <%= form.number_field :userauthentication_id,id: :commentsection_userauthentication_id,type: :hidden,class:"form-control",value:current_userauthentication.id %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.number_field :articlesection_id,id: :commentsection_articlesection_id,type: :hidden,class:"form-control",value: @article_id %>
+  </div>
+
+  <div class="field form-group ">
+    <%= form.label :'Post your comment' %><br>
+    <%= form.text_area :comment, :cols => 50, :rows => 2 ,class:"form-control"%>
+  </div>
+  <br>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-secondary"%>  |
+    <%= link_to 'Back', root_path,class:"btn btn-outline-secondary" %>
+  </div>
+
+  <br>
+<% end %>

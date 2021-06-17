@@ -4,9 +4,18 @@
   <p class="lead">Content : </p>
   <textarea class="form-control" rows="3" readonly><%= @articlesection.article_content %></textarea>
   <p class="lead">Likes : <%= @articlesection.likes_count %></p>
-  <br>
+
   <%= link_to 'Edit', edit_articlesection_path(@articlesection),class:"btn btn-outline-secondary"%>
   <%= link_to 'Back', articlesections_path,class:"btn btn-outline-secondary" %>
   <br>
-
+  <br>
+  <button class="btn btn-primary" type="button" data-toggle="tabs" data-target= <%= @articlesection.article_topic %> aria-expanded="false" aria-controls=<%= @articlesection.article_topic %>>
+    Comments
+  </button>
+<div class="collapse" id=<%= @articlesection.article_topic %>>
+  <div class="card card-body">
+    <%= render 'commentsections/show'%>
+  </div>
+</div>
+<br>
 </div>

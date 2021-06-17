@@ -8,6 +8,8 @@ class ArticlesectionsController < ApplicationController
 
   # GET /articlesections/1 or /articlesections/1.json
   def show
+    @article_id=params[:article_id]
+    @comments = Commentsection.order('created_at DESC')
   end
 
 

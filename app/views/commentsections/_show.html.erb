@@ -1,0 +1,8 @@
+<% @comments.each do |i| %>
+  <% if i.articlesection_id == @articlesection.id %>
+    <p class="lead">User :  <%= (Userauthentication.find_by id:i.userauthentication_id).email %></p>
+    <textarea class="form-control" rows="1" readonly><%= i.comment %></textarea>
+    <br>
+  <% end %>
+<% end %>
+<br>

@@ -1,15 +1,15 @@
 <%= form_with(model: articlesection) do |form| %>
-  <% if articlesection.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(articlesection.errors.count, "error") %> prohibited this articlesection from being saved:</h2>
+<% if articlesection.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(articlesection.errors.count, "error") %> prohibited this articlesection from being saved:</h2>
 
-      <ul>
-        <% articlesection.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <ul>
+      <% articlesection.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
   <div class="field form-group">
     <%= form.number_field :userauthentication_id,id: :articlesection_userauthentication_id,type: :hidden ,class:"form-control",value:current_userauthentication.id %>
   </div>

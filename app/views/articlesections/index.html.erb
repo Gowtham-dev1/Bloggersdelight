@@ -21,9 +21,8 @@
             <% end %>
           </td>
           <td><%= articlesection.likes_count %></td>
-          <td><%= link_to 'Show', articlesection %></td>
-          <td><%= link_to 'Edit', edit_articlesection_path(articlesection) %></td>
-          <td><%= link_to 'Destroy', articlesection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'View', articlesection ,class:"btn btn-light"%></td>
+          <td><%= link_to 'Destroy', articlesection, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-outline-danger" %></td>
         </tr>
       <% end %>
     <% end %>
