@@ -28,6 +28,26 @@ class ArticlesectionsController < ApplicationController
 
     respond_to do |format|
       if @articlesection.save
+        #creating a new row in Likesection table with article id
+
+        @new_one=Likesection.new
+        @new_one.articlesection_id= @articlesection.id
+        @new_one.users_liked=""
+        if @new_one.save
+          puts "
+
+          done - #{@new_one}
+
+
+          "
+        else
+          puts "
+
+          error - #{@new_one}
+
+          "
+        end
+
         format.html { redirect_to @articlesection, notice: "Articlesection was successfully created." }
         format.json { render :show, status: :created, location: @articlesection }
       else
@@ -62,6 +82,7 @@ class ArticlesectionsController < ApplicationController
   def all_articles
     @user= Userauthentication.all
     @articles = Articlesection.order('created_at DESC')
+    @likesection = Likesection.all
   end
 
   private
