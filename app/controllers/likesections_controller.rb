@@ -1,6 +1,6 @@
 class LikesectionsController < ApplicationController
   before_action :authenticate_userauthentication!
-  
+
   def new_like
     @article_id= params[:article_id]
     @artic=Likesection.find_by articlesection_id:@article_id
@@ -12,7 +12,7 @@ class LikesectionsController < ApplicationController
     count=@article_likes_count.likes_count
     count+=1
     @article_likes_count.update(likes_count: count)
-    redirect_to '/'
+    redirect_to root_path(anchor: 'like'<< @article_id.to_s )
   end
 
   def remove_like
