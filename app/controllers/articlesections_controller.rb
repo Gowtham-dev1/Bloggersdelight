@@ -8,8 +8,10 @@ class ArticlesectionsController < ApplicationController
 
   # GET /articlesections/1 or /articlesections/1.json
   def show
-    @article_id=params[:article_id]
+    @article_id=params[:id]
+    @like_count = (Articlesection.find_by id:@article_id).likes_count
     @comments = Commentsection.order('created_at DESC')
+    @likes = (Likesection.find_by articlesection_id: @article_id).users_liked
   end
 
 
@@ -83,6 +85,16 @@ class ArticlesectionsController < ApplicationController
     @user= Userauthentication.all
     @articles = Articlesection.order('created_at DESC')
     @likesection = Likesection.all
+    @favo=Favorite.all
+  end
+
+  def view_more
+    @article_id=params[:article_id]
+    @articlesection = Articlesection.find_by id:@article_id
+    @like_count = (Articlesection.find_by id:@article_id).likes_count
+    @comments = Commentsection.order('created_at DESC')
+    @likes = (Likesection.find_by articlesection_id: @article_id).users_liked
+    @user = (Userauthentication.find_by id:@articlesection.userauthentication_id).email
   end
 
   private

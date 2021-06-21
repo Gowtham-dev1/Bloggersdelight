@@ -1,5 +1,6 @@
 class LikesectionsController < ApplicationController
-
+  before_action :authenticate_userauthentication!
+  
   def new_like
     @article_id= params[:article_id]
     @artic=Likesection.find_by articlesection_id:@article_id

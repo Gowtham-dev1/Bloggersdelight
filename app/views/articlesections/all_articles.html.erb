@@ -1,9 +1,14 @@
-<h1>Welcome</h1>
+<h1 style="text-align:center;">Welcome Blogger!!</h1>
 <br>
 <% if userauthentication_signed_in? %>
   <% @articles.each do |i| %>
     <div class="row p-3 mb-2 bg-light text-dark shadow-none p-3 mb-5 bg-light rounded ">
       <div class="col-sm-12">
+        <% if (@favo.find_by articlesection_id: i.id , userauthentication_id: current_userauthentication.id)==nil %>
+          <p style="text-align:right;"><%= link_to "Add to favorites?",favorites_add_path(:article_id =>i.id),class: "btn btn-light" %></p>
+        <% else %>
+          <p style="text-align:right;"><%= link_to "Favorite one!!",favorites_remove_path(:article_id =>i.id),class: "btn btn-outline-success" %></p>
+        <% end %>
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><%=i.article_topic%></h5>
@@ -18,6 +23,7 @@
                   <%= link_to "Like", likesections_new_like_path(:article_id =>i.id),class: "btn btn-primary" %>
                 <% end %>
             <%= link_to "Comment",commentsections_new_path(:article_id => i.id),class: "btn btn-primary" %>
+            <%= link_to "View More",articlesections_view_more_path(:article_id => i.id),class: "btn btn-primary" %>
             <p style="text-align:right;">
             <%="Credits : "+ (@user.find_by id: i.userauthentication_id).email%></p></h5>
           </div>

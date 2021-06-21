@@ -14,6 +14,9 @@
           <%= link_to "New Article",new_articlesection_path,class:"nav-link" %>
         </li>
         <li class="nav-item">
+          <%= link_to "Favorites",favorites_show_path,class:"nav-link" %>
+        </li>
+        <li class="nav-item">
           <%= link_to "Edit Profile",edit_userauthentication_registration_path,class:"nav-link" %>
         </li>
         <li class="nav-item">
@@ -30,11 +33,5 @@
       <% end %>
 
     </ul>
-    <% if userauthentication_signed_in? %>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    <% end %>
   </div>
 </nav>

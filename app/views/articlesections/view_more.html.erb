@@ -1,11 +1,9 @@
 <div class="jumbotron">
-  <h1 class="display-4">My Article</h1>
+  <h1 class="display-4">Article</h1>
+  <p class="lead"><%="Author : "+  @user%></p>
   <p class="lead">Topic : <%= @articlesection.article_topic %></p>
   <p class="lead">Content : </p>
   <textarea class="form-control" rows="3" readonly><%= @articlesection.article_content %></textarea>
-  <%= link_to 'Edit', edit_articlesection_path(@articlesection),class:"btn btn-outline-secondary"%>
-  <%= link_to 'Back', articlesections_path,class:"btn btn-outline-secondary" %>
-  <br>
   <br>
   <button class="btn btn-primary" type="button" data-toggle="tabs" data-target= <%= @articlesection.article_topic %> aria-expanded="false" aria-controls=<%= @articlesection.article_topic %>>
     <%= @articlesection.likes_count %> Liked
@@ -22,4 +20,5 @@
   </div>
 </div>
 <br>
+<%= link_to 'Back', root_path,class:"btn btn-outline-secondary" %>
 </div>
