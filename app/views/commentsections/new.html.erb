@@ -1,15 +1,23 @@
 <div class="jumbotron">
   <h1 class="display-4">Comment Section</h1>
+  <br>
+  <% empty_section = true %>
   <% @comments.each do |i| %>
     <% if i.articlesection_id.to_i == @article_id.to_i %>
+      <% empty_section = false %>
       <p class="lead">User :  <%= (Userauthentication.find_by id:i.userauthentication_id).email %></p>
       <textarea class="form-control" rows="1" readonly><%= i.comment %></textarea>
       <br>
     <% end %>
   <% end %>
-  <br>
+  <% if empty_section %>
+    <br>
+    <p class = "lead"> Be the first to comment!! </p>
+    <%= render 'commentform', commentsection: @commentsection%>
+  <% end %>
 </div>
-
-<%= render 'commentform', commentsection: @commentsection%>
+<% if !empty_section %>
+  <%= render 'commentform', commentsection: @commentsection%>
+<% end %>
 <br>
 <br>

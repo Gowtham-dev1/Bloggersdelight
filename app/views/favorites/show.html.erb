@@ -1,5 +1,12 @@
 <h1 style="text-align:center;">Favorites!!</h1>
 <br>
+<% if @favorites.length == 0 %>
+  <br>
+  <br>
+  <p style="text-align:center;">No Favorites yet, Find one here
+  <%= link_to "Articles", root_path,class:"btn btn-outline-secondary" %>
+  </p>
+<% else %>
   <% @favorites.each do |i| %>
     <% if i.userauthentication_id==current_userauthentication.id %>
       <div class="row p-3 mb-2 bg-light text-dark shadow-none p-3 mb-5 bg-light rounded ">
@@ -19,3 +26,4 @@
       </div>
     <% end %>
   <% end %>
+<% end %>

@@ -14,7 +14,6 @@ class ArticlesectionsController < ApplicationController
     @likes = (Likesection.find_by articlesection_id: @article_id).users_liked
   end
 
-
   # GET /articlesections/new
   def new
     @articlesection = Articlesection.new

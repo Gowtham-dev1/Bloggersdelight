@@ -9,10 +9,11 @@ ActiveAdmin.register Favorite do
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:userauthentication_id, :articlesection_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+  filter :userauthentication_id , as: :select
+   permit_params do
+     permitted = [:userauthentication_id, :articlesection_id]
+     permitted << :other if params[:action] == 'create' && current_user.admin?
+     permitted
+   end
+
 end
