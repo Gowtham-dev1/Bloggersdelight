@@ -1,6 +1,7 @@
 class ArticlesectionsController < ApplicationController
   before_action :set_articlesection, only: %i[ show edit update destroy ]
   before_action :authenticate_userauthentication!
+
   # GET /articlesections or /articlesections.json
   def index
     @articlesections = Articlesection.all
@@ -93,8 +94,5 @@ class ArticlesectionsController < ApplicationController
     def articlesection_params
       params.require(:articlesection).permit(:userauthentication_id, :article_topic, :article_content, :likes_count)
     end
-
-
-
 
 end

@@ -4,7 +4,7 @@ class LikesectionsController < ApplicationController
   def new_like
     @article_id= params[:article_id]
     @artic=Likesection.find_by articlesection_id:@article_id
-    s=(Likesection.find_by articlesection_id:@article_id).users_liked.to_s
+    s=@artic.users_liked.to_s
     s<<current_userauthentication.id.to_s
     s<<','
     @artic.update(users_liked: s)
@@ -18,7 +18,7 @@ class LikesectionsController < ApplicationController
   def remove_like
     @article_id= params[:article_id]
     @artic=Likesection.find_by articlesection_id:@article_id
-    s=(Likesection.find_by articlesection_id:@article_id).users_liked.split(",")
+    s=@artic.users_liked.split(",")
     s.delete(current_userauthentication.id.to_s)
     s=s.join(",")
     s<<","
