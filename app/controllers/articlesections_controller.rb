@@ -34,20 +34,7 @@ class ArticlesectionsController < ApplicationController
         @new_one=Likesection.new
         @new_one.articlesection_id= @articlesection.id
         @new_one.users_liked=""
-        if @new_one.save
-          puts "
-
-          done - #{@new_one}
-
-
-          "
-        else
-          puts "
-
-          error - #{@new_one}
-
-          "
-        end
+        @new_one.save
 
         format.html { redirect_to @articlesection, notice: "Articlesection was successfully created." }
         format.json { render :show, status: :created, location: @articlesection }

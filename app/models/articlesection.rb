@@ -3,8 +3,8 @@ class Articlesection < ApplicationRecord
   validates :article_content, presence: true, length: { maximum: 350 }
 
   belongs_to :userauthentication
-  has_many :commentsections
-  has_many :favorites
-  has_one :likesection
+  has_many :commentsections, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_one :likesection, dependent: :destroy
 
 end

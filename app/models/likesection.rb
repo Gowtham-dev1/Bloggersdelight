@@ -1,3 +1,3 @@
 class Likesection < ApplicationRecord
-  belongs_to :articlesection
+  belongs_to :articlesection 
 end

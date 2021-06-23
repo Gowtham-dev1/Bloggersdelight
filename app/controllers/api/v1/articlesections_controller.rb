@@ -28,6 +28,7 @@ module Api
       def update
         @update = Articlesection.find_by id: params[:id]
         @update.update(article_topic: params[:topic])
+
       end
 
     end
