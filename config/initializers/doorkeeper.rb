@@ -1,19 +1,41 @@
 # frozen_string_literal: true
 
 Doorkeeper.configure do
+  default_scopes :read
+  optional_scopes :write
+  enforce_configured_scopes
+
+  skip_authorization do
+     true
+   end
+
   orm :active_record
-  resource_owner_from_credentials do |_routes|
-    #Userauthentication.authenticate(params[:email], params[:password])
-    current_userauthentication || warden.authenticate!(scope: :userauthentication)
+  resource_owner_authenticator do
+   # raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
+   # Put your resource owner authentication logic here.
+   # Example implementation:
+   # Userauthentication.find_by(id: session[:userauthentication_id]) || redirect_to(new_userauthentication_session_path)
+   current_userauthentication || warden.authenticate!(scope: :userauthentication)
+ end
+
+ resource_owner_from_credentials do |_routes|
+    Userauthentication.authenticate(params[:email], params[:password])
   end
+
+
+
+
+  grant_flows %w[password]
+
+  allow_blank_redirect_uri true
+  #resource_owner_from_credentials do |_routes|
+  #end
 
   admin_authenticator do |_routes|
     current_userauthentication || warden.authenticate!(scope: :userauthentication)
   end
 
   # enable password grant
-  grant_flows %w[password]
-  
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
   # file then you need to declare this block in order to restrict access to the web interface for
