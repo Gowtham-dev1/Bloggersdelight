@@ -23,6 +23,9 @@ class FavoritesController < ApplicationController
     end
   end
 
+  
+
+
   def show
     @favorites=Favorite.all
     @article=Articlesection.all

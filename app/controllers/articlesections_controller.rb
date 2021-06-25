@@ -84,6 +84,7 @@ class ArticlesectionsController < ApplicationController
     @user = (Userauthentication.find_by id:@articlesection.userauthentication_id).email
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_articlesection
