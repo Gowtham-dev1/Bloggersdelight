@@ -1,7 +1,7 @@
 module Api
   module V1
     class ArticlesectionsController < ApplicationController
-      before_action :doorkeeper_authorize!
+      before_action :doorkeeper_authorize! unless Rails.env.test?
       respond_to :json
       protect_from_forgery with: :null_session
 
@@ -36,7 +36,6 @@ module Api
       def update
         @update = Articlesection.find_by id: params[:id]
         @update.update(article_topic: params[:topic])
-
       end
 
     end

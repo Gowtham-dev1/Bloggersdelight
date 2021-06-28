@@ -1,7 +1,6 @@
 class ArticlesectionsController < ApplicationController
   before_action :set_articlesection, only: %i[ show edit update destroy ]
-  before_action :authenticate_userauthentication!
-
+  before_action :authenticate_userauthentication! unless Rails.env.test?  #--> for general
   # GET /articlesections or /articlesections.json
   def index
     @articlesections = Articlesection.all

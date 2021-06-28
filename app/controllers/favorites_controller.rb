@@ -23,11 +23,8 @@ class FavoritesController < ApplicationController
     end
   end
 
-  
-
-
   def show
-    @favorites=Favorite.all
+    @favorites=Favorite.where(userauthentication_id: current_userauthentication)
     @article=Articlesection.all
     @user=Userauthentication.all
   end
