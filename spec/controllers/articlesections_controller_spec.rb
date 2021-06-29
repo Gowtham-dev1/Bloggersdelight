@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe ArticlesectionsController, type: :controller do
   context 'checking get #all_articles' do
     it 'successful response' do
+      allow_any_instance_of(ArticlesectionsController).to receive(:authenticate_userauthentication!) {true}
       get :all_articles
       expect(response).to be_successful
     end
     it 'successful show' do
-      user=Userauthentication.create(email:'123@com', password: '123456' )
-      user.save
-      fav=Articlesection.create(userauthentication_id:user.id,article_topic: "ok",article_content: "okokok",likes_count: 0)
-      fav.save
-      like=Likesection.create(articlesection_id:fav.id,users_liked:0)
+      allow_any_instance_of(ArticlesectionsController).to receive(:authenticate_userauthentication!) {true}
+      user=create(:userauthentication)
+      fav=create(:articlesection,userauthentication_id:user.id)
+      like=create(:likesection, articlesection_id:fav.id)
       get :show ,params: {id:fav.id}
       expect(response).to be_successful
     end

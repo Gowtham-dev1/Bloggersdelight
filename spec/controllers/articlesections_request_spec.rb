@@ -4,14 +4,13 @@ RSpec.describe "articlesections_request",type: :request do
 
 	context 'On custom api' do
 		before do
-			@user=Userauthentication.create(email:'123@com', password: '123456' )
-			@user.save
-			@fav=Articlesection.create(userauthentication_id:@user.id,article_topic: "ok",article_content: "okokok",likes_count: 0)
-			@fav.save
-			@like=Likesection.create(articlesection_id:@fav.id,users_liked:0)
+			@user=create(:userauthentication)
+			@fav=create(:articlesection,userauthentication_id:@user.id)
+			@like=create(:likesection, articlesection_id:@fav.id)
 		end
-		
+
 		it 'returns success response' do
+			#allow_any_instance_of(ArticlesectionsController).to receive(:doorkeeper_authorize!) {true}
 			get api_v1_articlesections_path
 			expect(response).to be_successful
 	  end
@@ -34,8 +33,7 @@ RSpec.describe "articlesections_request",type: :request do
 
 	context 'Value on custom api' do
 		it 'Add value in api' do
-			@user=Userauthentication.create(email:'123@com', password: '123456' )
-			@user.save
+			@user=create(:userauthentication)
 			post '/api/v1/articlesections' ,params: {article_topic:"AI" , article_content: "AIAI",userauthentication_id: @user.id,users_liked:0}
 			expect(response).to be_successful
 		end
