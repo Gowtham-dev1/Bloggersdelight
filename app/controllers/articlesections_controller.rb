@@ -1,6 +1,6 @@
 class ArticlesectionsController < ApplicationController
   before_action :set_articlesection, only: %i[ show edit update destroy ]
-  before_action :authenticate_userauthentication! #unless Rails.env.test?  #--> for general
+  before_action :authenticate_userauthentication! ,except: %i[all_articles]
   # GET /articlesections or /articlesections.json
   def index
     @articlesections = Articlesection.all
@@ -68,10 +68,7 @@ class ArticlesectionsController < ApplicationController
   end
 
   def all_articles
-    @user= Userauthentication.all
     @articles = Articlesection.order('created_at DESC')
-    @likesection = Likesection.all
-    @favo=Favorite.all
   end
 
   def view_more
@@ -83,6 +80,14 @@ class ArticlesectionsController < ApplicationController
     @user = (Userauthentication.find_by id:@articlesection.userauthentication_id).email
   end
 
+  def search_article
+    @search = params[:search].to_s
+    if(@search.size>0)
+      @articles = Articlesection.where('lower(article_topic) LIKE ?', @search+'%').includes(:userauthentication,:likesection)
+    else
+      redirect_to '/'
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -27,13 +27,25 @@
         <%= link_to "Sign Up",new_userauthentication_registration_path,class:"nav-link" %>
       </li>
       <% end %>
-    </ul>
-    <% if !userauthentication_signed_in? %>
-    <%= link_to "Admin Login?",new_admin_user_session_path,class:"btn btn-outline-danger" %>
-    <% else %>
-    <li class="nav-item">
-      <%= link_to "Sign Out",destroy_userauthentication_session_path, method: :delete,class:"btn btn-outline-danger" %>
+      <li>
+      <% if !userauthentication_signed_in? %>
+      <%= link_to "Admin Login?",new_admin_user_session_path,class:"btn btn-outline-danger" %>
+      <% else %>
+      <li class="nav-item">
+        <%= link_to "Sign Out",destroy_userauthentication_session_path, method: :delete,class:"btn btn-outline-danger" %>
+      </li>
+      <% end %>
     </li>
+  </ul>
+    <% if userauthentication_signed_in? %>
+      <%= form_with url: "/search_article" ,  class: "d-flex me-2" , method: :get do |form| %>
+        <div class="field" >
+          <%= form.text_field :search , class: "form-control me-2"%>
+        </div>
+        <div class="actions" style="margin-left:10px">
+          <%= form.submit "Search" ,class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </nav>

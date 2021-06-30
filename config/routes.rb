@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  get '/search_article', :to => 'articlesections#search_article'
   get 'articlesections/view_more'
   devise_for :userauthentications
   resources :articlesections

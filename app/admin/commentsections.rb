@@ -5,15 +5,15 @@ ActiveAdmin.register Commentsection do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :userauthentication_id, :articlesection_id, :comment
+  permit_params :userauthentication_id, :articlesection_id, :comment
   #
   # or
   #
   filter :userauthentication_id , as: :select
-   # permit_params do
-   #   permitted = [:userauthentication_id, :articlesection_id, :comment]
-   #   permitted << :other if params[:action] == 'create' && current_user.admin?
-   #   permitted
-   # end
+   permit_params do
+     permitted = [:userauthentication_id, :articlesection_id, :comment]
+     permitted << :other if params[:action] == 'create' && current_user.admin?
+     permitted
+   end
 
 end

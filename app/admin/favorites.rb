@@ -5,15 +5,15 @@ ActiveAdmin.register Favorite do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :userauthentication_id, :articlesection_id
+  permit_params :userauthentication_id, :articlesection_id
   #
   # or
   #
   filter :userauthentication_id , as: :select
-   # permit_params do
-   #   permitted = [:userauthentication_id, :articlesection_id]
-   #   permitted << :other if params[:action] == 'create' && current_user.admin?
-   #   permitted
-   # end
+  permit_params do
+   permitted = [:userauthentication_id, :articlesection_id]
+   permitted << :other if params[:action] == 'create' && current_user.admin?
+   permitted
+ end
 
 end
