@@ -3,7 +3,7 @@ class ArticlesectionsController < ApplicationController
   before_action :authenticate_userauthentication! ,except: %i[all_articles]
   # GET /articlesections or /articlesections.json
   def index
-    @articlesections = Articlesection.all
+    @articlesections = Articlesection.where(userauthentication_id:current_userauthentication.id)
   end
 
   # GET /articlesections/1 or /articlesections/1.json
@@ -68,7 +68,7 @@ class ArticlesectionsController < ApplicationController
   end
 
   def all_articles
-    @articles = Articlesection.order('created_at DESC')
+    @articles = Articlesection.order('created_at DESC').includes(:userauthentication,:likesection,:favorites)
   end
 
   def view_more
@@ -83,7 +83,7 @@ class ArticlesectionsController < ApplicationController
   def search_article
     @search = params[:search].to_s
     if(@search.size>0)
-      @articles = Articlesection.where('lower(article_topic) LIKE ?', @search+'%').includes(:userauthentication,:likesection)
+      @articles = Articlesection.where('lower(article_topic) LIKE ?', @search+'%').includes(:userauthentication,:likesection,:favorites)
     else
       redirect_to '/'
     end
