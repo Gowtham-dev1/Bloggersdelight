@@ -1,6 +1,6 @@
 class Articlesection < ApplicationRecord
   validates :article_topic, presence: true, length: { maximum: 40 }
-  validates :article_content, presence: true, length: { maximum: 350 }
+  validates :article_content, presence: true, length: { maximum: 450 }
   before_save :not_saved
   after_save :saved
 

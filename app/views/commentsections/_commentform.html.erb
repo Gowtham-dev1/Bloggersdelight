@@ -1,5 +1,4 @@
-<%= form_with(model: commentsection) do |form| %>
-
+<%= form_with do |form| %>
 
   <div class="field form-group">
     <%= form.number_field :userauthentication_id,id: :commentsection_userauthentication_id,type: :hidden,class:"form-control",value:current_userauthentication.id %>

@@ -11,13 +11,13 @@ class CommentsectionsController < ApplicationController
     new_one.userauthentication_id= params[:userauthentication_id]
     new_one.articlesection_id= params[:articlesection_id]
     new_one.comment = params[:comment]
-    respond_to do |format|
-      if new_one.save
-        format.html { redirect_to '/', notice: "Comment added." }
-      else
-        format.html { redirect_to '/', notice: "Comment was not added!!" }
-      end
+    if new_one.save
+      @articlesection=Articlesection.find_by id:params[:articlesection_id]
+      @comments = Commentsection.order('created_at DESC')
+    else
+      redirect_to request.referrer, notice: "Comment was not added!!"
     end
+
   end
 
 end

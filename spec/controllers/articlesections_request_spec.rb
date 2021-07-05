@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "articlesections_request",type: :request do
+RSpec.describe "On Articlesection API",type: :request do
 
-	context 'On custom api' do
+	context 'CRUD functionalities' do
 		before do
 			@user=create(:userauthentication)
 			@fav=create(:articlesection,userauthentication_id:@user.id)
@@ -10,7 +10,6 @@ RSpec.describe "articlesections_request",type: :request do
 		end
 
 		it 'returns success response' do
-			#allow_any_instance_of(ArticlesectionsController).to receive(:doorkeeper_authorize!) {true}
 			get api_v1_articlesections_path
 			expect(response).to be_successful
 	  end
@@ -31,7 +30,7 @@ RSpec.describe "articlesections_request",type: :request do
 		end
 	end
 
-	context 'Value on custom api' do
+	context 'POST on API' do
 		it 'Add value in api' do
 			@user=create(:userauthentication)
 			post '/api/v1/articlesections' ,params: {article_topic:"AI" , article_content: "AIAI",userauthentication_id: @user.id,users_liked:0}

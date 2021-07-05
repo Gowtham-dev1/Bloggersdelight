@@ -13,11 +13,11 @@
   <% if empty_section %>
     <br>
     <p class = "lead"> Be the first to comment!! </p>
-    <%= render 'commentform', commentsection: @commentsection%>
+    <%= render 'commentform' %>
   <% end %>
 </div>
 <% if !empty_section %>
-  <%= render 'commentform', commentsection: @commentsection%>
+  <%= render 'commentform' %>
 <% end %>
 <br>
 <br>

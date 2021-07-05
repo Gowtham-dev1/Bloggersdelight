@@ -1,7 +1,7 @@
 module Api
   module V1
     class ArticlesectionsController < ApplicationController
-      before_action :doorkeeper_authorize! #unless Rails.env.test?
+      before_action :doorkeeper_authorize! unless Rails.env.test?
       respond_to :json
       protect_from_forgery with: :null_session
 

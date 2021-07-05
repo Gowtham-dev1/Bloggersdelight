@@ -1,7 +1,7 @@
 <% total_likes = @likes.split(",") %>
 <p class="form-control">
 <% total_likes.each do |i| %>
-    <%= (Userauthentication.find_by id:i).email %> ,
+    <%= (Userauthentication.find_by id:i.to_i).email %> ,
 <% end %>
 </p>
 <br>
