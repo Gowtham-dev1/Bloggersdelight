@@ -15,5 +15,14 @@ ActiveAdmin.register Commentsection do
      permitted << :other if params[:action] == 'create' && current_user.admin?
      permitted
    end
+   
+   index do
+     selectable_column
+     id_column
+     column :userauthentication_id
+     column :articlesection_id
+     column :comment
+     actions
+   end
 
 end

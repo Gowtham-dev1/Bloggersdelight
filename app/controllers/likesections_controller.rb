@@ -21,7 +21,9 @@ class LikesectionsController < ApplicationController
     s=@artic.users_liked.split(",")
     s.delete(current_userauthentication.id.to_s)
     s=s.join(",")
-    s<<","
+    if(s.length>0)
+      s<<","
+    end
     if(s == nil)
       s=""
     end

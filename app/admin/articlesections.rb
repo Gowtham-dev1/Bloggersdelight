@@ -17,6 +17,15 @@ ActiveAdmin.register Articlesection do
      permitted << :other if params[:action] == 'create' && current_user.admin?
      permitted
    end
+   index do
+     selectable_column
+     id_column
+     column :userauthentication_id
+     column :article_topic
+     column :article_content
+     column :likes_count
+     actions
+   end
 
 
 end
