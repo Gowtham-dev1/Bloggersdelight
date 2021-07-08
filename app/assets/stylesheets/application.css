@@ -13,3 +13,18 @@
  *= require articlesections
  *= require_self
  */
+ div.card{
+
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+ div.card:hover{
+     transform: scale(1.00);
+   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+ }
+
+#bg {
+ background-image: url("https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+ background-color: #cccccc;
+ background-repeat: no-repeat;
+ background-size: cover;
+}

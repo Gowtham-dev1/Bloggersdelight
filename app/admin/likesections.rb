@@ -5,15 +5,21 @@ ActiveAdmin.register Likesection do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :articlesection_id, :users_liked
+  permit_params :articlesection_id
   #
   # or
   #
   filter :articlesection_id , as: :select
-   permit_params do
-     permitted = [:articlesection_id, :users_liked]
-     permitted << :other if params[:action] == 'create' && current_user.admin?
-     permitted
+   # permit_params do
+   #   permitted = [:articlesection_id]
+   #   permitted << :other if params[:action] == 'create' && current_user.admin?
+   #   permitted
+   # end
+   form do |f|
+     f.inputs "Likeduser" do
+       f.input :articlesection_id
+     end
+     f.actions
    end
 
 end

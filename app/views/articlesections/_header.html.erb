@@ -17,6 +17,9 @@
           <%= link_to "Favorites",favorites_show_path,class:"nav-link" %>
         </li>
         <li class="nav-item">
+          <%= link_to "My Activity",activitysections_view_activity_path,class:"nav-link" %>
+        </li>
+        <li class="nav-item">
           <%= link_to "Edit Profile",edit_userauthentication_registration_path,class:"nav-link" %>
         </li>
       <% else %>
@@ -40,7 +43,7 @@
     <% if userauthentication_signed_in? %>
       <%= form_with url: "/search_article" ,  class: "d-flex me-2" , method: :get do |form| %>
         <div class="field" >
-          <%= form.text_field :search , class: "form-control me-2", placeholder: "Search by article topic"%>
+          <%= form.text_field :search , class: "form-control me-2", placeholder: "Search here"%>
         </div>
         <div class="actions" style="margin-left:10px">
           <%= form.submit "Search" ,class: "btn btn-outline-secondary" %>

@@ -14,6 +14,11 @@ class CommentsectionsController < ApplicationController
     if new_one.save
       @articlesection=Articlesection.find_by id:params[:articlesection_id]
       @comments = Commentsection.order('created_at DESC')
+      new_activity=Activitysection.new
+      new_activity.userauthentication_id=current_userauthentication.id
+      new_activity.activity="Commented on an article"
+      new_activity.articlesection_id=params[:articlesection_id]
+      new_activity.save
     else
       redirect_to request.referrer, notice: "Comment was not added!!"
     end

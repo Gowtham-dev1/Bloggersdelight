@@ -5,5 +5,7 @@ class LikedUserTableCreation < ActiveRecord::Migration[6.1]
       t.integer :userauthentication_id
 
       t.timestamps
+    end
+    rename_column :likesections, :users_liked, :likeduser_id
   end
 end

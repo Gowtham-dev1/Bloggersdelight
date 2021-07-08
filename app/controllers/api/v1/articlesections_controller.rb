@@ -22,6 +22,7 @@ module Api
 
       def destroy
         Articlesection.find(params[:id]).destroy
+        respond_with({message:"Deletion Successful"})
       end
 
       def create
@@ -30,12 +31,15 @@ module Api
         @new.article_content= params[:content]
         @new.userauthentication_id=params[:user_id]
         @new.likes_count=params[:likes]
+        @new.categorysection_id=params[:categorysection_id]
         @new.save
+        render json:{article:@new}
       end
 
       def update
         @update = Articlesection.find_by id: params[:id]
         @update.update(article_topic: params[:topic])
+        respond_with({:article=>@update})
       end
 
     end

@@ -1,21 +1,27 @@
 class ArticlesectionsController < ApplicationController
   before_action :set_articlesection, only: %i[ show edit update destroy ]
-  before_action :authenticate_userauthentication! ,except: %i[all_articles]
+  before_action :authenticate_userauthentication! ,except: %i[all_articles] #unless Rails.env.test?
 
   def index
     @articlesections = Articlesection.where(userauthentication_id:current_userauthentication.id)
+    respond_to do |format|
+      format.html
+      format.csv{ send_data @articlesections.to_csv}
+    end
   end
-
 
   def show
     @article_id=params[:id]
+    @article=Articlesection.find_by id:@article_id
     @like_count = (Articlesection.find_by id:@article_id).likes_count
     @comments = Commentsection.order('created_at DESC')
-    @likes = (Likesection.find_by articlesection_id: @article_id).users_liked
+    @category = Categorysection.find_by id:((Articlesection.find_by id:@article_id).categorysection_id)
+    @likes = @article.likesection.likedusers
   end
 
   def new
     @articlesection = Articlesection.new
+    @category = Categorysection.all
   end
 
   def edit
@@ -23,15 +29,21 @@ class ArticlesectionsController < ApplicationController
 
   def create
     @articlesection = Articlesection.new(articlesection_params)
-
+    # puts"
+    # #{params[:category]}
+    # "
     respond_to do |format|
       if @articlesection.save
         #creating a new row in Likesection table with article id
 
         @new_one=Likesection.new
         @new_one.articlesection_id= @articlesection.id
-        @new_one.users_liked=""
         @new_one.save
+        new_activity=Activitysection.new
+        new_activity.userauthentication_id=current_userauthentication.id
+        new_activity.activity="Added a new article"
+        new_activity.articlesection_id=@articlesection.id
+        new_activity.save
 
         format.html { redirect_to @articlesection, notice: "Articlesection was successfully created." }
         format.json { render :show, status: :created, location: @articlesection }
@@ -55,6 +67,11 @@ class ArticlesectionsController < ApplicationController
   def update
     respond_to do |format|
       if @articlesection.update(articlesection_params)
+        new_activity=Activitysection.new
+        new_activity.userauthentication_id=current_userauthentication.id
+        new_activity.activity="Updated an article"
+        new_activity.articlesection_id=@articlesection.id
+        new_activity.save
         format.html { redirect_to @articlesection, notice: "Articlesection was successfully updated." }
         format.json { render :show, status: :ok, location: @articlesection }
       else
@@ -81,15 +98,24 @@ class ArticlesectionsController < ApplicationController
     @articlesection = Articlesection.find_by id:@article_id
     @like_count = (Articlesection.find_by id:@article_id).likes_count
     @comments = Commentsection.order('created_at DESC')
-    @likes = (Likesection.find_by articlesection_id: @article_id).users_liked
     @user = (Userauthentication.find_by id:@articlesection.userauthentication_id).email
+    @category = Categorysection.find_by id:((Articlesection.find_by id:@article_id).categorysection_id)
+    @likes = @articlesection.likesection.likedusers
   end
 
   def search_article
     @search = params[:search].to_s.downcase
     if(@search.size>0)
+      @bool=false
+      @category=Categorysection.where('lower(category) LIKE ?', @search+'%')
+      @category.each do|category|
+        category.articlesections.each do|i|
+          @bool=true
+          break
+        end
+      end
       @articles = Articlesection.where('lower(article_topic) LIKE ?', @search+'%').includes(:userauthentication,:likesection,:favorites)
-      if(@articles.length==0)
+      if(@articles.length==0 && @bool==false)
         redirect_to '/', :notice => "No results found!"
       end
     else
@@ -103,7 +129,7 @@ class ArticlesectionsController < ApplicationController
     end
 
     def articlesection_params
-      params.require(:articlesection).permit(:userauthentication_id, :article_topic, :article_content, :likes_count)
+      params.require(:articlesection).permit(:userauthentication_id, :article_topic, :article_content, :likes_count,:categorysection_id)
     end
 
 end

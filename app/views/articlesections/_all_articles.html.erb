@@ -18,15 +18,14 @@
             <h5 class="card-title"><%=i.article_topic%></h5>
             <p class="card-text"><%=i.article_content%></p>
             <br>
-              <h5 class="card-title">
-                <% users=i.likesection.users_liked.to_s.split(',') %>
-                <% if users.include?current_userauthentication.id.to_s %>
-                  <%= link_to "Liked", likesections_remove_like_path(:article_id =>i.id),class:"btn btn-outline-success",:anchor => 'like_' << i.id.to_s %>
-                <% else %>
-                  <%= link_to "Like", likesections_new_like_path(:article_id =>i.id),class: "btn btn-primary" %>
-                <% end %>
-            <%= link_to "Comment",commentsections_new_path(:article_id => i.id),class: "btn btn-primary" %>
-            <%= link_to "View More",articlesections_view_more_path(:article_id => i.id),class: "btn btn-primary" %>
+            <h5 class="card-title">
+              <% if (Likeduser.find_by likesection_id:(Likesection.find_by articlesection_id:i.id).id , userauthentication_id: current_userauthentication.id).nil? %>
+                <%= link_to "Like", likesections_new_like_path(:article_id =>i.id),class: "btn btn-primary" %>
+              <% else %>
+                 <%= link_to "Liked", likesections_remove_like_path(:article_id =>i.id),class:"btn btn-outline-success" %>
+              <% end %>
+              <%= link_to "Comment",commentsections_new_path(:article_id => i.id),class: "btn btn-primary" %>
+              <%= link_to "View More",articlesections_view_more_path(:article_id => i.id),class: "btn btn-primary" %>
             <p style="text-align:right;">
             <%="Credits : "+ i.userauthentication.email%></p></h5>
           </div>

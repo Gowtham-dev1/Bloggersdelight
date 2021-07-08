@@ -1,6 +1,7 @@
 <div class="jumbotron">
   <h1 class="display-4">Article</h1>
   <p class="lead"><%="Author : "+  @user%></p>
+  <p class="lead">Category : <%= @articlesection.categorysection.category %></p>
   <p class="lead">Topic : <%= @articlesection.article_topic %></p>
   <p class="lead">Content : </p>
   <textarea class="form-control" rows="3" readonly><%= @articlesection.article_content %></textarea>
@@ -9,16 +10,16 @@
     <%= @articlesection.likes_count %> Liked
   </button>
 <div class="collapse" id=<%= @articlesection.article_topic %>>
-    <%= render 'likesections/show'%>
+  <%= render 'likesections/show'%>
 </div>
   <button class="btn btn-primary" type="button" data-toggle="tabs" data-target= <%= @articlesection.article_topic %> aria-expanded="false" aria-controls=<%= @articlesection.article_topic %>>
     Comments
   </button>
 <div class="collapse" id=<%= @articlesection.article_topic %>>
-  <div class="card card-body">
+  <div class="container bg-light" style="margin-top:10px;">
     <%= render 'commentsections/show'%>
   </div>
 </div>
 <br>
-<%= link_to 'Back', root_path,class:"btn btn-outline-secondary" %>
+<%= link_to 'Back', activitysections_view_activity_path,class:"btn btn-outline-secondary" %>
 </div>

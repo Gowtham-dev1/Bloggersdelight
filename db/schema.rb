@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_041840) do
+ActiveRecord::Schema.define(version: 2021_07_07_100047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 2021_07_06_041840) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "activitysections", force: :cascade do |t|
+    t.integer "userauthentication_id"
+    t.string "activity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "articlesection_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -48,6 +56,13 @@ ActiveRecord::Schema.define(version: 2021_07_06_041840) do
     t.integer "likes_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "categorysection_id"
+  end
+
+  create_table "categorysections", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "commentsections", force: :cascade do |t|
@@ -65,9 +80,15 @@ ActiveRecord::Schema.define(version: 2021_07_06_041840) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "likedusers", force: :cascade do |t|
+    t.integer "likesection_id"
+    t.integer "userauthentication_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "likesections", force: :cascade do |t|
     t.integer "articlesection_id"
-    t.string "users_liked"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -114,14 +135,6 @@ ActiveRecord::Schema.define(version: 2021_07_06_041840) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
-  create_table "replysections", force: :cascade do |t|
-    t.integer "userauthentication_id"
-    t.integer "commentsection_id"
-    t.string "reply"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "userauthentications", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -130,6 +143,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_041840) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "user_banned"
     t.index ["email"], name: "index_userauthentications_on_email", unique: true
     t.index ["reset_password_token"], name: "index_userauthentications_on_reset_password_token", unique: true
   end

@@ -14,6 +14,12 @@
     <%= form.number_field :userauthentication_id,id: :articlesection_userauthentication_id,type: :hidden ,class:"form-control",value:current_userauthentication.id %>
   </div>
 
+  <div>
+    <h6><%=form.label :categorysection_id,class:'fw-bold'%></h6>
+    <%= form.collection_select :categorysection_id , Categorysection.all, :id, :category , {}, class: 'form-select',style:'width:200px;font-size:15px;' %> <br><br>
+   </div>
+
+
   <div class="field form-group">
     <%= form.label :article_topic %>
     <%= form.text_field :article_topic  ,class:"form-control"%>

@@ -1,6 +1,9 @@
 class Userauthentication < ApplicationRecord
   has_many :articlesections, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :likedusers, dependent: :destroy
+  has_many :activitysections, dependent: :destroy
+  has_many :commentsections, through: :articlesections
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -17,5 +20,13 @@ class Userauthentication < ApplicationRecord
    def self.authenticate(email, password)
       user = Userauthentication.find_for_authentication(email: email)
       user&.valid_password?(password) ? user : nil
+   end
+
+   def active_for_authentication?
+     super && !self.user_banned
+   end
+
+   def inactive_message
+	   "Your account is temporarily banned"
    end
 end

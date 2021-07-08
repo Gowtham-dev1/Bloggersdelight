@@ -1,1 +1,40 @@
-<%= render 'all_articles' %>
+<%if @category.length!=0 %>
+  <h1 style="text-align:center;">Welcome Blogger!!</h1>
+  <br>
+  <% @category.each do|category| %>
+     <% category.articlesections.each do|article|%>
+         <div class="row p-3 mb-2 bg-light text-dark shadow-none p-3 mb-5 bg-light rounded ">
+           <div class="col-sm-12">
+             <% hash={} %>
+             <% current_userauthentication.favorites.each do |fav| %>
+               <% hash[fav.articlesection_id] =1 %>
+             <% end %>
+             <%if hash[article.id].nil? %>
+               <p style="text-align:right;"><%= link_to "Add to favorites?",favorites_add_path(:article_id =>article.id),class: "btn btn-light" %></p>
+             <% else %>
+               <p style="text-align:right;"><%= link_to "Favorite one!!",favorites_remove_path(:article_id =>article.id),class: "btn btn-outline-success" %></p>
+             <% end %>
+             <div class="card">
+               <div class="card-body">
+                 <h5 class="card-title"><%=article.article_topic%></h5>
+                 <p class="card-text"><%=article.article_content%></p>
+                 <br>
+                 <h5 class="card-title">
+                   <% if (Likeduser.find_by likesection_id:(Likesection.find_by articlesection_id:article.id).id , userauthentication_id: current_userauthentication.id).nil? %>
+                     <%= link_to "Like", likesections_new_like_path(:article_id =>article.id),class: "btn btn-primary" %>
+                   <% else %>
+                      <%= link_to "Liked", likesections_remove_like_path(:article_id =>article.id),class:"btn btn-outline-success" %>
+                   <% end %>
+                   <%= link_to "Comment",commentsections_new_path(:article_id => article.id),class: "btn btn-primary" %>
+                   <%= link_to "View More",articlesections_view_more_path(:article_id => article.id),class: "btn btn-primary" %>
+                 <p style="text-align:right;">
+                 <%="Credits : "+ article.userauthentication.email%></p></h5>
+               </div>
+             </div>
+           </div>
+         </div>
+      <% end %>
+    <% end %>
+<% else %>
+  <%= render 'all_articles' %>
+<% end %>

@@ -1,0 +1,19 @@
+<h1 style="text-align:center;">All Activities</h1>
+<% if @activity.length == 0 %>
+  <br>
+  <br>
+  <p style="text-align:center;">No Activites recorded
+  </p>
+<% else %>
+  <% @activity.each do |activity| %>
+  <center style="margin:20px;">
+    <div class="card w-75">
+      <div class="card-body bg-light" >
+        <p style="text-align:left;"><%= activity.activity %></p>
+        <p style="text-align:left;"><%= time_ago_in_words(activity.created_at).capitalize %></p>
+        <p style="text-align:right;"><%= link_to "View Article", articlesections_view_more_path(:article_id => activity.articlesection_id),class: "btn btn-primary" %></p>
+      </div>
+    </div>
+  </center>
+  <% end %>
+<% end %>

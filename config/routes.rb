@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'favorites/add'
   get 'favorites/remove'
   get 'favorites/show'
+  get 'activitysections/view_activity'
   post "/commentsections/new", :to => 'commentsections#create'
 
 end

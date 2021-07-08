@@ -10,12 +10,12 @@ ActiveAdmin.register Commentsection do
   # or
   #
   filter :userauthentication_id , as: :select
-   permit_params do
-     permitted = [:userauthentication_id, :articlesection_id, :comment]
-     permitted << :other if params[:action] == 'create' && current_user.admin?
-     permitted
-   end
-   
+   # permit_params do
+   #   permitted = [:userauthentication_id, :articlesection_id, :comment]
+   #   permitted << :other if params[:action] == 'create' && current_user.admin?
+   #   permitted
+   # end
+
    index do
      selectable_column
      id_column
@@ -23,6 +23,14 @@ ActiveAdmin.register Commentsection do
      column :articlesection_id
      column :comment
      actions
+   end
+   form do |f|
+     f.inputs "Commentsection" do
+       f.input :articlesection_id
+       f.input :userauthentication_id
+       f.input :comment
+     end
+     f.actions
    end
 
 end
