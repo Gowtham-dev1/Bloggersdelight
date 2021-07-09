@@ -1,3 +1,4 @@
+<body id='bg02'>
 <% @comments.each do |i| %>
   <% if i.articlesection_id == @articlesection.id %>
     <p class="lead">User :  <%= (Userauthentication.find_by id:i.userauthentication_id).email %></p>
@@ -6,3 +7,4 @@
   <% end %>
 <% end %>
 <br>
+</body>

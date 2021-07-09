@@ -7,6 +7,9 @@
         <% hash={} %>
         <% current_userauthentication.favorites.each do |fav| %>
           <% hash[fav.articlesection_id] =1 %>
+          <% if fav.articlesection_id==i.id %>
+             <% break %>
+          <% end %>
         <% end %>
         <%if hash[i.id].nil? %>
           <p style="text-align:right;"><%= link_to "Add to favorites?",favorites_add_path(:article_id =>i.id),class: "btn btn-light" %></p>

@@ -10,36 +10,54 @@ module Api
       end
 
       def show
-        respond_with Articlesection.find_by id: params[:id]
+        if Articlesection.find_by(id:(params[:id]))==nil
+          render json:{message:"No article with id:#{params[:id]}"}
+        else
+          respond_with Articlesection.find_by id: params[:id]
+        end
       end
 
       def showall
-        @user=Userauthentication.find_by id:(Articlesection.find_by id:params[:id]).userauthentication_id
-        @article=Articlesection.find_by id: params[:id]
-        @comments=Commentsection.where(articlesection_id: params[:id])
-        respond_with({:author=>@user ,:article=>@article, :comments => @comments})
+        if Articlesection.find_by(id:(params[:id]))==nil
+          render json:{message:"No article with id:#{params[:id]}"}
+        else
+          article=Articlesection.find_by id: params[:id]
+          user=article.userauthentication
+          comments=article.commentsections
+          category=article.categorysection
+          liked_users=article.likesection.likedusers
+          respond_with({:author=>user ,:article=>article, :comments => comments,:category=>category,:liked_users=>liked_users})
+        end
       end
 
       def destroy
-        Articlesection.find(params[:id]).destroy
-        respond_with({message:"Deletion Successful"})
+        if Articlesection.find_by(id:(params[:id]))==nil
+          render json:{message:"No article with id:#{params[:id]}"}
+        else
+          Articlesection.find(params[:id]).destroy
+          render json:{message:"Deletion Successful"}
+        end
       end
 
       def create
-        @new = Articlesection.new
-        @new.article_topic = params[:topic]
-        @new.article_content= params[:content]
-        @new.userauthentication_id=params[:user_id]
-        @new.likes_count=params[:likes]
-        @new.categorysection_id=params[:categorysection_id]
-        @new.save
-        render json:{article:@new}
+        new_article = Articlesection.new
+        new_article.article_topic = params[:topic]
+        new_article.article_content= params[:content]
+        new_article.userauthentication_id=params[:user_id]
+        new_article.likes_count=params[:likes]
+        new_article.categorysection_id=params[:categorysection_id]
+        new_article.save
+        render json:{article:new_article}
       end
 
       def update
-        @update = Articlesection.find_by id: params[:id]
-        @update.update(article_topic: params[:topic])
-        respond_with({:article=>@update})
+        if Articlesection.find_by(id:(params[:id]))==nil
+          render json:{message:"No article with id:#{params[:id]}"}
+        else
+          update_article = Articlesection.find_by id: params[:id]
+          update_article.update(article_topic: params[:topic])
+          render json:{message:"Update Successful",article:update_article}
+        end
       end
 
     end

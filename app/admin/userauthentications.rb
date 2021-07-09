@@ -26,4 +26,18 @@ ActiveAdmin.register Userauthentication do
    #  permitted
    # end
 
+  action_item :ban_user , only: :show do
+    if !userauthentication.user_banned
+      link_to "Ban User", ban_user_admin_userauthentication_path(userauthentication) , method: :put
+    else
+      link_to "Unban User" ,ban_user_admin_userauthentication_path(userauthentication) , method: :put
+    end
+  end
+
+  member_action :ban_user , method: :put do
+    userauthentication = Userauthentication.find(params[:id])
+    userauthentication.update(user_banned: !userauthentication.user_banned)
+    redirect_to admin_userauthentication_path(userauthentication)
+  end
+
 end

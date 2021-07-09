@@ -1,6 +1,7 @@
+<body id='bg02'>
 <div class="jumbotron">
   <h1 class="display-4">Article</h1>
-  <p class="lead"><%="Author : "+  @user%></p>
+  <p class="lead"><%="Author : "+  @articlesection.userauthentication.email%></p>
   <p class="lead">Category : <%= @articlesection.categorysection.category %></p>
   <p class="lead">Topic : <%= @articlesection.article_topic %></p>
   <p class="lead">Content : </p>
@@ -21,5 +22,6 @@
   </div>
 </div>
 <br>
-<%= link_to 'Back', activitysections_view_activity_path,class:"btn btn-outline-secondary" %>
+<%= link_to 'Back', root_path,class:"btn btn-outline-secondary" %>
 </div>
+</body>

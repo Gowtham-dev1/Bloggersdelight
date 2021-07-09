@@ -13,13 +13,13 @@
         <div class="col-sm-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><%=(@article.find_by id:i.articlesection_id).article_topic%></h5>
-              <p class="card-text"><%=(@article.find_by id:i.articlesection_id).article_content%></p>
+              <h5 class="card-title"><%=i.articlesection.article_topic%></h5>
+              <p class="card-text"><%=i.articlesection.article_content%></p>
               <br>
               <%= link_to "View More",articlesections_view_more_path(:article_id => i.articlesection_id),class: "btn btn-primary" %>
               <p style="text-align:right;">
                 <%  %>
-              <%="Credits : "+ (@user.find_by id:(@article.find_by id:i.articlesection_id).userauthentication_id).email%></p></h5>
+              <%="Credits : "+ i.articlesection.userauthentication.email%></p></h5>
             </div>
           </div>
         </div>
