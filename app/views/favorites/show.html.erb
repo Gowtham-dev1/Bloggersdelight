@@ -11,6 +11,7 @@
     <% if i.userauthentication_id==current_userauthentication.id %>
       <div class="row p-3 mb-2 bg-light text-dark shadow-none p-3 mb-5 bg-light rounded ">
         <div class="col-sm-12">
+          <p style="text-align:right;"><%= link_to "Favorite one!!",favorites_remove_path(:article_id =>i.articlesection_id),class: "btn btn-outline-success" %></p>
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%=i.articlesection.article_topic%></h5>

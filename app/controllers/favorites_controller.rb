@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
         new_activity.activity="Added a favorite article"
         new_activity.articlesection_id=params[:article_id]
         new_activity.save
-        format.html { redirect_to '/', notice: "Favorite added." }
+        format.html { redirect_to request.referrer, notice: "Favorite added." }
       end
     end
   end
@@ -26,7 +26,7 @@ class FavoritesController < ApplicationController
         new_activity.activity="Article removed from favorites"
         new_activity.articlesection_id=params[:article_id]
         new_activity.save
-        format.html { redirect_to '/', notice: "Favorite removed." }
+        format.html { redirect_to request.referrer, notice: "Favorite removed." }
       end
     end
   end

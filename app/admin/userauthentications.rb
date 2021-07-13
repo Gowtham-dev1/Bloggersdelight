@@ -37,6 +37,11 @@ ActiveAdmin.register Userauthentication do
   member_action :ban_user , method: :put do
     userauthentication = Userauthentication.find(params[:id])
     userauthentication.update(user_banned: !userauthentication.user_banned)
+    if(userauthentication.user_banned)
+      BanAlertMailer.with(userauthentication).ban_alert_email.deliver_now
+    else
+      BanAlertMailer.with(userauthentication).unban_alert_email.deliver_now
+    end
     redirect_to admin_userauthentication_path(userauthentication)
   end
 

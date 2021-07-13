@@ -41,6 +41,19 @@ RSpec.describe "On Articlesection API",type: :request do
 		end
 	end
 
+	context 'Custom API call' do
+		it 'Showall in API' do
+			user=create(:userauthentication)
+			category=create(:categorysection)
+			article=create(:articlesection,userauthentication_id:user.id,categorysection_id:category.id)
+			comment=Commentsection.create(userauthentication_id:user.id,articlesection_id:article.id,comment:"WoW")
+			like=Likesection.create(articlesection_id:article.id)
+			liked_user=Likeduser.create(likesection_id:like.id,userauthentication_id:user.id)
+			get '/api/v1/articlesections/showall'+"/"+article.id.to_s
+			expect(response).to be_successful
+		end
+	end
+
 	def valid_json?(response)
     if JSON.parse(response.body.to_s)
       return true
